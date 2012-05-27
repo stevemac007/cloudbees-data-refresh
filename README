@@ -17,13 +17,17 @@ Required XML Structure
 	</cloudbeesConfig>
 	<source>
 		<sourceDBId>myapplication-production</sourceDBId>
-		<takeNewSnapshot>trye</takeNewSnapshot>
+		<takeNewSnapshot>true</takeNewSnapshot>
 	</source>
 	<destination>
 		<destinationDBId>myapplication-development</destinationDBId>
 		<applicationId>stevemac/myapplication</applicationId>
 	</destination>
 	
+	<!-- reset all of the user's email addresses -->
 	<postDeploySQL sql="update USER set email = 'noone@example.org' where email is not null" />
+	
+	<!-- reset all production passwords to 'testpwd' -->
+	<postDeploySQL sql="update USER set password = 'testpwd'" />
 	
 </database-refresh>
