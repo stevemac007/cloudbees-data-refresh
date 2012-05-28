@@ -12,7 +12,6 @@
 	<artifactId>cloudbees-data-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 
-	<name>CloudBees database refresh script</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -46,7 +45,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.whitesquare</groupId>
-			<artifactId>cloudbees-data-refresh</artifactId>
+			<artifactId>cloudbees-data-refresh-engine</artifactId>
 			<version>0.5.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -76,5 +75,7 @@
 			</extension>
 		</extensions>
 	</build>
+	<description>Maven Plugin to execute CloudBees database refresh script</description>
+	<name>cloudbees-data-maven-plugin</name>
 </project>
 

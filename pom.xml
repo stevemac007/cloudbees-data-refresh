@@ -9,7 +9,7 @@
 	<version>0.5.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 		
-	<name>Database reset script for cloudbees</name>
+	<name>cloudbees-data-refresh-parent</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -21,4 +21,5 @@
 		<module>cloudbees-data-refresh-maven</module>
 	</modules>
 	
+	<description>Parent project for CloudBees database refresh project</description>
 </project>
