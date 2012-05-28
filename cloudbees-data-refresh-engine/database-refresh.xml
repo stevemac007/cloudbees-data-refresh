@@ -1,0 +1,24 @@
+<database-refresh>
+	<cloudbeesConfig>
+		<apiKey>D7371DF8249BD049</apiKey>
+		<secret>VAZ4IA9SBSP2ATXXEOJ9EA17MKB/SYMMRB3RSGBAZMA=</secret>
+	</cloudbeesConfig>
+	<source>
+		<sourceDBId>fixturetime-prod</sourceDBId>
+		<takeNewSnapshot>false</takeNewSnapshot>
+	</source>
+	<destination>
+		<destinationDBId>fixturetime</destinationDBId>
+		<applicationId>stevemac/fixturetime</applicationId>
+		<destinationDBUrl>jdbc:mysql://ec2-75-101-156-134.compute-1.amazonaws.com/fixturetime</destinationDBUrl>
+		<destinationDBUsername>fixturetime</destinationDBUsername>
+		<destinationDBPassword>shackit</destinationDBPassword>
+	</destination>
+	
+	<postDeploySQL sql="update WUSER set email = 'testdev@fixturetime.com.au' where email is not null" />
+	<postDeploySQL sql="update WUSER set email2 = 'testdev@fixturetime.com.au' where email2 is not null" />
+
+	<postDeploySQL sql="update PLAYER set email = 'testdev@fixturetime.com.au' where email is not null" />
+	<postDeploySQL sql="update PLAYER set email2 = 'testdev@fixturetime.com.au' where email2 is not null" />
+	
+</database-refresh>
