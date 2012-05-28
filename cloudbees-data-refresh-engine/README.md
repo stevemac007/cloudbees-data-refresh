@@ -7,7 +7,6 @@ Create the refres definition XML file (structure below)
 
 Execute the XMLDatabaseRefresh.groovy file.
 
-
 Required XML Structure
 -----------------------------------
 <database-refresh>
@@ -31,3 +30,5 @@ Required XML Structure
 	<postDeploySQL sql="update USER set password = 'testpwd'" />
 	
 </database-refresh>
+
+[![Build Status](https://buildhive.beescloud.com/job/stevemac007/job/cloudbees-data-refresh/badge/icon)](https://buildhive.beescloud.com/job/stevemac007/job/cloudbees-data-refresh/)
