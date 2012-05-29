@@ -17,6 +17,7 @@ to deploy the engine and maven plugin to your local environment.
 
 Once installed you can configure your maven build with XML like:
 
+            <plugin>
                 <groupId>com.whitesquare</groupId>
                 <artifactId>cloudbees-data-maven-plugin</artifactId>
                 <version>0.5.0-SNAPSHOT</version>
