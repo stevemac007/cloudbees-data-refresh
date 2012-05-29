@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -56,10 +57,17 @@ public class RefreshMojo extends AbstractMojo {
 	/**
 	 * The id of the stax application.
 	 * 
-	 * @parameter expression="${bees.destinationDb}"
+	 * @parameter expression="${bees.applicationDb}"
 	 */
 	private String applicationId;
 	
+    /**
+     * A list6 of post deploy scripts to run to sanatise the data.
+     *
+     * @parameter expression="${bees.postDeploySQL}"
+     */
+    private List postDeploySQL;
+    
 	/**
 	 * Bees api key.
 	 * 
@@ -129,7 +137,7 @@ public class RefreshMojo extends AbstractMojo {
 
 			engine.setApplicationId(applicationId);
 			
-//			engine.setSanatiseSQLStatements(postDeploySQL);
+			engine.setSanatiseSQLStatements(postDeploySQL);
 			
 			engine.processRefresh();
 			
