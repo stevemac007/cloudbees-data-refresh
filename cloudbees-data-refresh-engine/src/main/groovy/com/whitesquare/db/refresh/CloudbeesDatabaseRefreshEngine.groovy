@@ -75,7 +75,7 @@ class CloudbeesDatabaseRefreshEngine {
 			
 			def url = "jdbc:mysql://${dbInfo.master}/${dbInfo.name}"
 			println "Connecting to database '${destinationDBId}' via URL '${url}'."
-			DBModification mod = new DBModification(url, dbInfo.username, dbInfo.password, Driver.class.getName());
+			DBModification mod = new DBModification(url, dbInfo.username, dbInfo.password, Driver.class.getName())
 			
 			println "Executing SQL statements : '${sanatiseSQLStatements}'."
 			mod.doUpdate(sanatiseSQLStatements);

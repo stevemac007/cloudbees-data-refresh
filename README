@@ -1,0 +1,49 @@
+This project enables a repeatable build process to redeploy a CloudBees database snapshot to another database.
+
+The original intention of this project is to enable an easy 'refresh' of development data, by taking an export of another database (possibly production) 
+and have this copied to a different database instance for development.
+
+Along with automating the CloudBees API to perform the backup and restore, this application can also execute post restore SQL to 'sanatise' the data ready for development.
+
+The two modules here are the basic Groovy script for driving Cloudbees, and a maven plugin.
+
+To easily support downloading of required dependancies, and also ease of configuration the Maven Plugin is recommended.
+
+There is no binary build of this available anywhere (hopefully soon), but you can just clone this repo and execute
+
+    mvn install
+    
+to deploy the engine and maven plugin to your local environment.
+
+Once installed you can configure your maven build with XML like:
+
+                <groupId>com.whitesquare</groupId>
+                <artifactId>cloudbees-data-maven-plugin</artifactId>
+                <version>0.5.0-SNAPSHOT</version>
+                <configuration>
+                    <sourceDb>myapplication-prod</sourceDb>
+                    <destinationDb>myapplication-dev</destinationDb>
+                    <applicationDb>myuser/myapp-dev</applicationDb>
+                    <takeNewSnapshot>false</takeNewSnapshot>
+                    <postDeploySQL>
+                        <sql>update USER set email = null</sql>
+                        <sql>update USER set password = 'resetpassword'</sql>
+                    </postDeploySQL>
+                </configuration>
+            </plugin>
+
+As long as you have setup your CloudBees authentication already this plugin should be executable with the command line:
+
+    mvn com.whitesquare:cloudbees-data-maven-plugin:refresh
+            
+With this configuration the plugin will locate the latest snapshot from 'myapplication-prod' and restore it to 'myapplication-dev'.
+
+The <applicationDb> tag defines a CloudBees application that will be stopped and restarted before and after the database restore.
+
+You can use the <takeNewSnapshot> tag to define if you want to snapshot the database first, if 'false' will use the most recent available snapshot.
+
+Once the deploy is complete, the system will retreive the database access credentials from the CloudBees API and connect to the DB executing all of the <sql> statements defined in the <postDeploySQL> section.
+
+
+PLEASE NOTE:  This project is VERY BETA, so please use at your own risk, I accept no responsibility for any data corruption or loss that this project may cause.  
+Please test this with non production DB's first to ensure that your configuration works as expected.
