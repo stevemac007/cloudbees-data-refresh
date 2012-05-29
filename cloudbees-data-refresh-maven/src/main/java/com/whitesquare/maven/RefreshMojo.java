@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -22,7 +22,7 @@ import com.whitesquare.db.refresh.CloudbeesDatabaseRefreshEngine;
  * Refresh a cloudbees database from another cloudbees database
  * 
  * @goal refresh
- * @execute phase = "package"
+ * @execute phase = "validate"
  * @requiresDependencyResolution runtime
  * 
  */
@@ -43,30 +43,30 @@ public class RefreshMojo extends AbstractMojo {
 	/**
 	 * The id of the stax application.
 	 * 
-	 * @parameter expression="${bees.sourceDb}"
+	 * @parameter expression="${sourceDb}"
 	 */
-	private String sourceDbid;
+	private String sourceDb;
 
 	/**
 	 * The id of the stax application.
 	 * 
-	 * @parameter expression="${bees.destinationDb}"
+	 * @parameter expression="${destinationDb}"
 	 */
-	private String destinationDbid;
+	private String destinationDb;
 
 	/**
 	 * The id of the stax application.
 	 * 
-	 * @parameter expression="${bees.applicationDb}"
+	 * @parameter expression="${applicationDb}"
 	 */
 	private String applicationId;
 	
     /**
      * A list6 of post deploy scripts to run to sanatise the data.
      *
-     * @parameter expression="${bees.postDeploySQL}"
+     * @parameter expression="${postDeploySQL}"
      */
-    private List postDeploySQL;
+    private ArrayList<String> postDeploySQL;
     
 	/**
 	 * Bees api key.
@@ -103,7 +103,7 @@ public class RefreshMojo extends AbstractMojo {
 	/**
 	 * The set of dependencies for the web application being run.
 	 * 
-	 * @parameter expression="${bees.takeNewSnapshot}" default-value = "false"
+	 * @parameter expression="${takeNewSnapshot}" default-value = "false"
 	 * @required
 	 * @readonly
 	 */
@@ -130,8 +130,8 @@ public class RefreshMojo extends AbstractMojo {
 			engine.setApiKey(apikey);
 			engine.setSecret(secret);
 			
-			engine.setSourceDBId(sourceDbid);
-			engine.setDestinationDBId(destinationDbid);
+			engine.setSourceDBId(sourceDb);
+			engine.setDestinationDBId(destinationDb);
 			
 			engine.setTakeNewSnapshot(takeNewSnapshot);
 
@@ -149,17 +149,14 @@ public class RefreshMojo extends AbstractMojo {
 
 	private void initManualConfig() throws IOException {
 
-		if (sourceDbid == null || sourceDbid.isEmpty()) {
-			sourceDbid = promptFor("Enter source database name: ");
+		if (sourceDb == null || sourceDb.isEmpty()) {
+			sourceDb = promptFor("Enter source database name: ");
 		}
 
-		if (destinationDbid == null || destinationDbid.isEmpty()) {
-			destinationDbid = promptFor("Enter destination database name: ");
+		if (destinationDb == null || destinationDb.isEmpty()) {
+			destinationDb = promptFor("Enter destination database name: ");
 		}
 
-		if (applicationId == null || applicationId.isEmpty()) {
-			applicationId = promptFor("Enter application name: ");
-		}
 	}
 
 	private Properties getConfigProperties() {
@@ -199,8 +196,8 @@ public class RefreshMojo extends AbstractMojo {
 	 * Initialize the parameter values (to allow system property overrides)
 	 */
 	private void initParameters(Properties properties) {
-		sourceDbid = getSysProperty("bees.sourceDb", sourceDbid);
-		destinationDbid = getSysProperty("bees.destinationDb", destinationDbid);
+		sourceDb = getSysProperty("bees.sourceDb", sourceDb);
+		destinationDb = getSysProperty("bees.destinationDb", destinationDb);
 
 		apikey = getSysProperty("bees.apikey", apikey);
 		if (apikey == null)
