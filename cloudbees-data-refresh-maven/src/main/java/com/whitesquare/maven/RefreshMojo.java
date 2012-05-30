@@ -31,38 +31,32 @@ public class RefreshMojo extends AbstractMojo {
 	// ----------------------------------------------------------------------
 	// Mojo Parameters
 	// ----------------------------------------------------------------------
-	/**
-	 * The packaging of the Maven project that this goal operates upon.
-	 * 
-	 * @parameter expression = "${project.packaging}"
-	 * @required
-	 * @readonly
-	 */
-	private String packaging;
 
 	/**
-	 * The id of the stax application.
+	 * The id of the source database.
 	 * 
 	 * @parameter expression="${sourceDb}"
+	 * @required
 	 */
 	private String sourceDb;
 
 	/**
-	 * The id of the stax application.
+	 * The id of the destination database.
 	 * 
 	 * @parameter expression="${destinationDb}"
+	 * @required
 	 */
 	private String destinationDb;
 
 	/**
-	 * The id of the stax application.
+	 * An optional id of a CloudBees application to shutdown during the re-deploy
 	 * 
 	 * @parameter expression="${applicationDb}"
 	 */
 	private String applicationId;
 	
     /**
-     * A list6 of post deploy scripts to run to sanatise the data.
+     * A list of post deploy scripts to run to sanatise the data.
      *
      * @parameter expression="${postDeploySQL}"
      */
@@ -92,20 +86,9 @@ public class RefreshMojo extends AbstractMojo {
 	private String apiurl;
 
 	/**
-	 * The set of dependencies for the web application being run.
-	 * 
-	 * @parameter default-value = "${basedir}"
-	 * @required
-	 * @readonly
-	 */
-	private String baseDir;
-	
-	/**
-	 * The set of dependencies for the web application being run.
+	 * Whether to take a new snapshot before the redeployment or not.
 	 * 
 	 * @parameter expression="${takeNewSnapshot}" default-value = "false"
-	 * @required
-	 * @readonly
 	 */
 	private boolean takeNewSnapshot;
 

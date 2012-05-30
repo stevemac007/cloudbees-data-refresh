@@ -39,7 +39,7 @@ class CloudbeesDatabaseRefreshEngine {
         }
         
         if (applicationId != null && !applicationId.isEmpty()) {
-            if (!checkApplicationExists(applicationId)) {
+            if (!checkApplicationExists(client, applicationId)) {
                 return;
             }
         }
@@ -82,7 +82,7 @@ class CloudbeesDatabaseRefreshEngine {
 		}
 		
         if (applicationId != null && !applicationId.isEmpty()) {
-			println "Restarting application '${applicationId}' before database refresh."
+			println "Restarting application '${applicationId}' after database refresh."
 			client.applicationStart(applicationId);
 		}
 	}
@@ -99,7 +99,7 @@ class CloudbeesDatabaseRefreshEngine {
     
     def checkApplicationExists(BeesClient client, String appId) {
         try {
-            return client.applicationInfo(appId, false) != null;
+            return client.applicationInfo(appId) != null;
         }
         catch (BeesClientException ex) {
             println "Unable to locate application '${appId}' on the specified account."
