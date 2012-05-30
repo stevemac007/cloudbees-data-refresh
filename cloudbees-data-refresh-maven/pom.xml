@@ -11,6 +11,8 @@
 
 	<artifactId>cloudbees-data-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
+    <name>cloudbees-data-maven-plugin</name>
+    <description>Maven Plugin to execute CloudBees database refresh script</description>
 
 	<url>http://maven.apache.org</url>
 
@@ -75,7 +77,6 @@
 			</extension>
 		</extensions>
 	</build>
-	<description>Maven Plugin to execute CloudBees database refresh script</description>
-	<name>cloudbees-data-maven-plugin</name>
+    
 </project>
 
