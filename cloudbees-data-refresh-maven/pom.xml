@@ -4,11 +4,12 @@
 	<parent>
 		<groupId>com.whitesquare</groupId>
 		<artifactId>cloudbees-data-refresh-parent</artifactId>
-		<version>0.5.0</version>
+		<version>0.6.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>cloudbees-data-maven-plugin</artifactId>
+  <version> 0.6.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
     <name>cloudbees-data-maven-plugin</name>
     <description>Maven Plugin to execute CloudBees database refresh script</description>
@@ -47,7 +48,7 @@
 		<dependency>
 			<groupId>com.whitesquare</groupId>
 			<artifactId>cloudbees-data-refresh-engine</artifactId>
-			<version>0.5.0</version>
+			<version> 0.6.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
